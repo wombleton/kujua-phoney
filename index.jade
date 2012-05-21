@@ -1,0 +1,37 @@
+!!!5
+head
+  title #{description}
+  link(href="css/phonefaker.css", type="text/css", rel="stylesheet")
+  // js('phonefaker.coffee')
+body
+  .navbar.navbar-fixed-top
+    .navbar-inner
+      .container
+        a.brand.clearfix(href="#") Kujua Phone Faker
+  .fixed-bottom
+    .container
+      form.form.form-horizontal.new-message
+        button.btn.btn-primary.pull-right.btn-large.send(type="submit") Send!
+        .control-group
+          label.control-label kujua-export URL
+          .controls
+            input.span4.export-url(placeholder="http://localhost:5984/kujua", value="http://localhost:5984/kujua")
+        .control-group
+          label.control-label Phones
+          .controls
+            input.inline.span3(placeholder="From", name="from")
+            | &nbsp;
+            input.inline.span3(placeholder="To", name="sent_to")
+        .control-group
+          label.control-label Message
+          .controls
+            input.span7(placeholder="message", name="message")
+  .container
+    h2 Previous messages
+    table.table.table-striped.table-bordered
+      thead
+        th.span2
+        th.span2 From
+        th.span2 To
+        th.span6 Message
+      tbody#messages

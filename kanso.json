@@ -1,0 +1,36 @@
+{
+  "name": "app",
+  "version": "0.0.1",
+  "title": "Kujua Phonefaker",
+  "description": "Add records to kujua without having a phone",
+  "load": "lib/app",
+  "attachments": ["index.jade", "static/css"],
+  "modules": ["lib"],
+  "coffee-script": {
+    "attachments": ["static/js"],
+    "modules": ["lib"]
+  },
+  "duality": {
+    "base_template": "index.html"
+  },
+  "jade": {
+    "compile": true,
+    "compress": true
+  },
+  "less": {
+    "compile": "static/css/phonefaker.less",
+    "compress": true,
+    "remove_from_attachments": true
+  },
+  "dependencies": {
+    "attachments": null,
+    "modules": null,
+    "properties": null,
+    "coffee-script-precompiler": null,
+    "kanso-assets": null,
+    "jade-precompiler": null,
+    "less-precompiler": null,
+    "kanso-bootstrap-fontawesome": null,
+    "underscore": null
+  }
+}
