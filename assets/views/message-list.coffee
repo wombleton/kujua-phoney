@@ -20,7 +20,7 @@ Phoney.MessageListView = Backbone.View.extend(
       complete: =>
         @$el.html('')
         @collection.fetch()
-        @updateKujua(data)
+        @prepareUpdate(data)
       contentType: 'application/json'
       data: JSON.stringify(data)
       dataType: 'json'
@@ -34,13 +34,28 @@ Phoney.MessageListView = Backbone.View.extend(
     hours = date.getHours()
     minutes = date.getMinutes()
     "#{month}-#{day}-#{year} #{hours}:#{minutes}"
-  updateKujua: (data) ->
+  executeUpdate: (response) ->
+    { callback } = JSON.parse(response.responseText)
+    if callback
+      { data, options } = callback
+      { headers, host, method, port, path } = options
+      opts =
+        complete: (response) =>
+          @executeUpdate(response)
+        data: JSON.stringify(data)
+        headers: headers
+        type: method
+        url: "http://#{host}:#{port}#{path}"
+      $.ajax(opts)
+  prepareUpdate: (data) ->
     url = "#{$('.export-url').val()}/_design/kujua-export/_rewrite/add"
     _.defaults(data,
       message_id: Math.ceil(Math.random() * 100000)
       sent_timestamp: @formatDate(new Date())
     )
     $.ajax(
+      complete: (response) =>
+        @executeUpdate(response)
       headers:
         'Content-Type': 'application/x-www-form-urlencoded'
       url: url

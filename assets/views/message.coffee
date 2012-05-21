@@ -7,7 +7,7 @@ Phoney.MessageView = Backbone.View.extend(
   resend: ->
     message = @model.get('value')
     view = $('#messages').data('view')
-    view.updateKujua(message)
+    view.prepareUpdate(message)
     { message, from, sent_to } = message
     $('[name=message]').val(message)
     $('[name=sent_to]').val(sent_to)
