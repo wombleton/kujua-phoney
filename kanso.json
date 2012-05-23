@@ -30,7 +30,7 @@
     "kanso-assets": null,
     "jade-precompiler": null,
     "less-precompiler": null,
-    "kanso-bootstrap-fontawesome": null,
+    "bootstrap-less": null,
     "underscore": null
   }
 }
