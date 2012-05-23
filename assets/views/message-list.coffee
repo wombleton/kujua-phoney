@@ -48,7 +48,7 @@ Phoney.MessageListView = Backbone.View.extend(
         url: "http://#{host}:#{port}#{path}"
       $.ajax(opts)
   prepareUpdate: (data) ->
-    url = "#{$('.export-url').val()}/_design/kujua-export/_rewrite/add"
+    url = $('.export-url').val()
     _.defaults(data,
       message_id: Math.ceil(Math.random() * 100000)
       sent_timestamp: @formatDate(new Date())
