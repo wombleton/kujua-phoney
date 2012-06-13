@@ -28,10 +28,11 @@ body
             input.span7(placeholder="message", name="message")
   .container
     h2 Previous messages
-    table.table.table-striped.table-bordered
-      thead
-        th.span2
-        th.span2 From
-        th.span2 To
-        th.span6 Message
-      tbody#messages
+    .row
+      .span2.offset2
+        b From
+      .span2
+        b To
+      .span6
+        b Message
+    #messages

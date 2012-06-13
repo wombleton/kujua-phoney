@@ -28,14 +28,15 @@ Phoney.MessageView = Backbone.View.extend(
       message: 'not supplied'
     )
     template = _.template("""
-      <td>
+      <div class="span2">
         <button class="btn btn-mini delete-message">Delete</button>
         <button class="btn btn-mini btn-primary resend-message">Resend</button>
-      </td>
-      <td><%= from %></td>
-      <td><%= sent_to %></td>
-      <td><%= message %></td>
+      </div>
+      <div class="span2"><%= from %></div>
+      <div class="span2"><%= sent_to %></div>
+      <div class="span6 data"><%= message %></div>
     """, value)
     @$el.html(template)
-  tagName: 'tr'
+  tagName: 'div'
+  className: 'row message'
 )
