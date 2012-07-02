@@ -1,8 +1,10 @@
 @import "bootstrap/bootstrap.less";
+@import "font-awesome.less";
 @baseFontPath: "../../bootstrap/font/";
+@fontIconDirectory: "../../../bootstrap-fontawesome/bootstrap/font";
 
 body {
-  margin: 40px 0 230px;
+  margin: 40px 0 115px;
 }
 
 .fixed-bottom {
@@ -17,6 +19,11 @@ body {
   bottom: 0;
   background-color: #999;
   padding: 10px 0 0;
+  .form-horizontal {
+    .control-group {
+      margin-bottom: 3px;
+    }
+  }
 }
 
 .send {

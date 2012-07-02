@@ -11,11 +11,11 @@ body
   .fixed-bottom
     .container
       form.form.form-horizontal.new-message
-        button.btn.btn-primary.pull-right.btn-large.send(type="submit") Send!
+        button.btn.btn-primary.pull-right.send(type="submit") Send!
         .control-group
           label.control-label kujua-export URL
           .controls
-            input.span4.export-url(placeholder="http://localhost:5984/kujua/_design/kujua-base/_rewrite/add", value="http://localhost:5984/kujua/_design/kujua-base/_rewrite/add")
+            input.span8.export-url(placeholder="http://localhost:5984/kujua/_design/kujua-base/_rewrite/add", value="http://localhost:5984/kujua/_design/kujua-base/_rewrite/add")
         .control-group
           label.control-label Phones
           .controls
@@ -25,14 +25,5 @@ body
         .control-group
           label.control-label Message
           .controls
-            input.span7(placeholder="message", name="message")
-  .container
-    h2 Previous messages
-    .row
-      .span2.offset2
-        b From
-      .span2
-        b To
-      .span6
-        b Message
-    #messages
+            input.span8(placeholder="message", name="message")
+  #app

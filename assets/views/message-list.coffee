@@ -1,32 +1,38 @@
-@Phoney ?= {}
+#= require ../collections/messages
+#= require message
 
 Phoney.MessageListView = Backbone.View.extend(
   initialize: ->
+    @collection = new Phoney.MessageList()
     @collection.bind('reset', @addAll, @)
     @collection.bind('add', @addOne, @)
     @collection.fetch()
     $('form').submit(->
       false
     )
-  render: ->
-    return
   addAll: ->
     @collection.each(@addOne, @)
   addOne: (message) ->
     view = new Phoney.MessageView(model: message)
-    @$el.append(view.render())
+    @$el.append(view.render().el)
   send: (data) ->
-    $.ajax(
-      complete: =>
-        @$el.html('')
-        @collection.fetch()
-        @prepareUpdate(data)
-      contentType: 'application/json'
-      data: JSON.stringify(data)
-      dataType: 'json'
-      type: 'POST'
-      url: 'messages'
+    existing = _.find(@collection.models, (model) ->
+      model.get('value').message is data.message
     )
+    if existing
+      @prepareUpdate(data)
+    else
+      $.ajax(
+        complete: =>
+          @$el.html('')
+          @collection.fetch()
+          @prepareUpdate(data)
+        contentType: 'application/json'
+        data: JSON.stringify(data)
+        dataType: 'json'
+        type: 'POST'
+        url: 'messages'
+      )
   formatDate: (date) ->
     year = date.getYear() - 100
     month = date.getMonth() + 1

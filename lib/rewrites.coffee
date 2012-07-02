@@ -12,6 +12,16 @@ module.exports = [
     to: 'static/js/*'
   }
   {
+    from: '/updates'
+    to: '_view/updates'
+    method: 'GET'
+  }
+  {
+    from: '/updates'
+    to: '_update/update'
+    method: 'POST'
+  }
+  {
     from: '/messages'
     to: '_view/messages'
     method: 'GET'

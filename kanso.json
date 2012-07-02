@@ -27,6 +27,7 @@
     "modules": null,
     "properties": null,
     "coffee-script-precompiler": null,
+    "font-awesome-kanso": null,
     "kanso-assets": null,
     "jade-precompiler": null,
     "less-precompiler": null,

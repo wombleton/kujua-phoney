@@ -11,3 +11,12 @@ module.exports =
           number: doc.number
           revision: doc._rev
         )
+  updates:
+    map: (doc) ->
+      { message, timestamp, to, type } = doc
+      if type is 'update'
+        emit(timestamp,
+          message: message
+          timestamp: timestamp
+          to: to
+        )

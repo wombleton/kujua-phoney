@@ -1,4 +1,4 @@
-@Phoney ?= {}
+#= require ../models/message
 
 Phoney.MessageList = Backbone.Collection.extend(
   model: Phoney.Message
