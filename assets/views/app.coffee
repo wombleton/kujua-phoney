@@ -3,7 +3,34 @@
 
 Phoney.AppView = Backbone.View.extend(
   initialize: ->
+    @phoneySince = 0
+    @phoneyChangeListener()
+    @kujuaSince = 0
+    @kujuaChangeListener()
     @render()
+  onKujuaChange: ->
+    @updates.checkMessages()
+  kujuaChangeListener: ->
+    $.ajax(
+      complete: (response) =>
+        result = JSON.parse(response.responseText)
+        @kujuaSince = result.last_seq
+        @kujuaChangeListener()
+        @onKujuaChange() if result.results.length > 0
+      url: "/kujua/_changes?feed=longpoll&since=#{@kujuaSince}"
+    )
+  onPhoneyChange: ->
+    @messages.update()
+    @updates.update()
+  phoneyChangeListener: ->
+    $.ajax(
+      complete: (response) =>
+        result = JSON.parse(response.responseText)
+        @phoneySince = result.last_seq
+        @phoneyChangeListener()
+        @onPhoneyChange() if result?.results?.length > 0
+      url: "/kujua-phoney/_changes?feed=longpoll&since=#{@phoneySince}"
+    )
   render: ->
     @$el.html("""
       <div class="container">

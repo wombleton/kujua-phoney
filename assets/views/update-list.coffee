@@ -6,13 +6,11 @@ Phoney.UpdateListView = Backbone.View.extend(
     @collection = new Phoney.UpdateList()
     @collection.bind('reset', @addAll, @)
     @collection.bind('add', @addOne, @)
+  update: ->
     @collection.fetch()
-    setInterval(=>
-      @checkMessages()
-    , 5000)
   checkMessages: ->
     $.ajax(
-      url: $('.export-url').val()
+      url: '/kujua/_design/kujua-base/_rewrite/add'
       complete: (response) =>
         updates = JSON.parse(response.responseText)
         { callback, payload } = updates

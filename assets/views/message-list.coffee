@@ -6,11 +6,13 @@ Phoney.MessageListView = Backbone.View.extend(
     @collection = new Phoney.MessageList()
     @collection.bind('reset', @addAll, @)
     @collection.bind('add', @addOne, @)
-    @collection.fetch()
     $('form').submit(->
       false
     )
+  update: ->
+    @collection.fetch()
   addAll: ->
+    @$el.html('')
     @collection.each(@addOne, @)
   addOne: (message) ->
     view = new Phoney.MessageView(model: message)
@@ -44,21 +46,18 @@ Phoney.MessageListView = Backbone.View.extend(
     { callback } = JSON.parse(response.responseText)
     if callback
       { data, options } = callback
-      { headers, host, method, port, path } = options
-      if port is 80
-        url = "http://#{host}#{path}"
-      else
-        url = "http://#{host}:#{port}#{path}"
+      { headers, method, path } = options
+
       opts =
         complete: (response) =>
           @executeUpdate(response)
         data: JSON.stringify(data)
         headers: headers
         type: method
-        url: url
+        url: path
       $.ajax(opts)
   prepareUpdate: (data) ->
-    url = $('.export-url').val()
+    url = '/kujua/_design/kujua-base/_rewrite/add'
     _.defaults(data,
       message_id: Math.ceil(Math.random() * 100000)
       sent_timestamp: @formatDate(new Date())
