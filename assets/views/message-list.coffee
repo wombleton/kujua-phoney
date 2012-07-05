@@ -45,13 +45,17 @@ Phoney.MessageListView = Backbone.View.extend(
     if callback
       { data, options } = callback
       { headers, host, method, port, path } = options
+      if port is 80
+        url = "http://#{host}#{path}"
+      else
+        url = "http://#{host}:#{port}#{path}"
       opts =
         complete: (response) =>
           @executeUpdate(response)
         data: JSON.stringify(data)
         headers: headers
         type: method
-        url: "http://#{host}:#{port}#{path}"
+        url: url
       $.ajax(opts)
   prepareUpdate: (data) ->
     url = $('.export-url').val()

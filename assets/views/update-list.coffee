@@ -44,6 +44,7 @@ Phoney.UpdateListView = Backbone.View.extend(
           )
     )
   addAll: ->
+    @$el.html('')
     @collection.each(@addOne, @)
   addOne: (update) ->
     view = new Phoney.UpdateView(model: update)
