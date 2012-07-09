@@ -13,10 +13,10 @@ module.exports =
         )
   updates:
     map: (doc) ->
-      { message, timestamp, to, type } = doc
+      { message, timestamp, sent_to, type } = doc
       if type is 'update'
         emit(timestamp,
           message: message
           timestamp: timestamp
-          to: to
+          sent_to: sent_to
         )

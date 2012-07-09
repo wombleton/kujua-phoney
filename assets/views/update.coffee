@@ -1,23 +1,18 @@
 @Phoney ?= {}
 
 Phoney.UpdateView = Backbone.View.extend(
-  load: ->
-    message = @model.get('value')
-    { message, from, sent_to } = message
-    $('[name=message]').val(message)
-    $('[name=sent_to]').val(sent_to)
-    $('[name=from]').val(from)
   initialize: ->
     @render()
   render: ->
-    value = @model.get('value')
-    { message, to } = value
+    ts = new Date(@model.get('timestamp'))
     @$el.html("""
-      <div class="span2 data">#{to}</div>
-      <div class="span4 data">#{message}</div>
+      <div class="span2 data">
+        <div class="label">#{@model.get('sent_to')}</div>
+        #{ts.getFullYear()}-#{ts.getMonth() + 1}-#{ts.getDate()} #{ts.getHours()}:#{ts.getMinutes()}
+      </div>
+      <div class="span4 data">#{@model.get('message')}</div>
     """)
     @
   tagName: 'div'
   className: 'row message'
 )
-
